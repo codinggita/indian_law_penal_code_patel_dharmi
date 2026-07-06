@@ -36,12 +36,12 @@
 | Resource | Link |
 |---|---|
 | 🌐 **Live App (Production)** | Coming Soon |
-| ▲ **Frontend Deploy (Vercel)** | Coming Soon |
-| 🚀 **Backend API (Render)** | Coming Soon |
-| 📦 **Frontend Repository** | Coming Soon |
+| ▲ **Frontend Deploy (Vercel)** | https://lexindia-1.netlify.app/ |
+| 🚀 **Backend API (Render)** | https://dashboard.render.com/web/srv-d8b9vjjtqb8s73d62uu0 |
+| 📦 **Frontend Repository** | https://github.com/Dharmi-456-design/indian_law_penal_code_patel_dharmi/tree/main/frontend |
 | 🗄️ **Backend Repository** | https://github.com/Dharmi-456-design/indian_law_penal_code_patel_dharmi/tree/main/backend |
 | ▶️ **YouTube Demo** | Coming Soon |
-| 📄 **API Health Check** | https://documenter.getpostman.com/view/50839318/2sBXwnuCRA |
+| 📄 **API Health Check** | https://documenter.getpostman.com/view/50839318/2sBXwtqpf9 |
 
 ---
 
