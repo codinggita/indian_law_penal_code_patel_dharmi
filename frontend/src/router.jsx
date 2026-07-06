@@ -16,6 +16,7 @@ import BookmarksPage from './pages/dashboard/user/BookmarksPage.jsx';
 import NotesPage from './pages/dashboard/user/NotesPage.jsx';
 import ProfilePage from './pages/dashboard/user/ProfilePage.jsx';
 import SearchPage from './pages/dashboard/user/SearchPage.jsx';
+import NotificationsPage from './pages/dashboard/user/NotificationsPage.jsx';
 
 /* ── Dashboard Pages (Admin) ── */
 import AdminDashboard from './pages/dashboard/admin/AdminDashboard.jsx';
@@ -51,6 +52,7 @@ function AppRouter() {
         <Route path="/dashboard/notes" element={<NotesPage />} />
         <Route path="/dashboard/profile" element={<ProfilePage />} />
         <Route path="/dashboard/search" element={<SearchPage />} />
+        <Route path="/dashboard/notifications" element={<NotificationsPage />} />
 
         {/* Admin Dashboard Routes */}
         <Route path="/admin" element={<AdminDashboard />} />

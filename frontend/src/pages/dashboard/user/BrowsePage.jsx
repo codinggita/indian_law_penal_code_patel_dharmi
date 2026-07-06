@@ -230,7 +230,9 @@ export default function BrowsePage() {
   useEffect(() => {
     api.get('/bookmarks')
       .then(res => {
-        const ids = new Set((res.data?.data || []).map(b => b.sectionId?._id || b.sectionId));
+        const ids = new Set((res.data?.data || []).map(b => {
+          return b.lawId?._id || b.sectionId?._id || b.lawId || b.sectionId;
+        }));
         setBookmarkedIds(ids);
       })
       .catch(() => {});
@@ -249,7 +251,7 @@ export default function BrowsePage() {
         await api.delete(`/bookmarks/${section._id}`);
         setBookmarkedIds(prev => { const n = new Set(prev); n.delete(section._id); return n; });
       } else {
-        await api.post('/bookmarks', { sectionId: section._id });
+        await api.post(`/bookmarks/${section._id}`);
         setBookmarkedIds(prev => new Set(prev).add(section._id));
       }
     } catch {
