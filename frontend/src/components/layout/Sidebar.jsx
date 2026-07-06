@@ -18,6 +18,7 @@ const Sidebar = () => {
     { name: 'Bookmarks', path: '/dashboard/bookmarks', icon: 'bookmark' },
     { name: 'My Notes', path: '/dashboard/notes', icon: 'edit_document' },
     { name: 'Profile', path: '/dashboard/profile', icon: 'person' },
+    { name: 'Billing & Plans', path: '/dashboard/billing', icon: 'credit_card' },
   ];
 
   const adminRoutes = [
