@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { setUser } from '../../../store/slices/authSlice';
 import api from '../../../services/api';
 
@@ -56,6 +57,7 @@ const Field = ({ label, id, type = 'text', value, onChange, readOnly = false, pl
 
 export default function ProfilePage() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { user } = useSelector((s) => s.auth);
 
   /* Edit modes */
@@ -520,7 +522,10 @@ export default function ProfilePage() {
                 ))}
               </div>
 
-              <button className="w-full h-9 rounded-lg bg-gradient-to-r from-[#FACC15] to-[#EAB308] hover:from-[#EAB308] hover:to-[#CA8A04] text-black text-xs font-bold shadow-md shadow-[#FACC15]/10 flex items-center justify-center gap-1.5 transition-all">
+              <button
+                onClick={() => navigate('/dashboard/billing')}
+                className="w-full h-9 rounded-lg bg-gradient-to-r from-[#FACC15] to-[#EAB308] hover:from-[#EAB308] hover:to-[#CA8A04] text-black text-xs font-bold shadow-md shadow-[#FACC15]/10 flex items-center justify-center gap-1.5 transition-all"
+              >
                 <span className="material-symbols-outlined text-[14px]">open_in_new</span>
                 Manage Billing
               </button>
