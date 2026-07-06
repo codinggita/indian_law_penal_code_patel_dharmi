@@ -104,7 +104,7 @@ function BookmarkCard({ bookmark, onRemove, navigate }) {
   const handleRemove = async () => {
     setRemoving(true);
     try {
-      await api.delete(`/bookmarks/${bookmark._id}`);
+      await api.delete(`/bookmarks/${bookmark.sectionId || bookmark._id}`);
     } catch (_) { /* silent */ }
     onRemove(bookmark._id);
   };
@@ -220,7 +220,8 @@ export default function BookmarksPage() {
             const sectionTitle = b.lawId?.sectionTitle || b.lawId?.sectionTitle || `Section ${sectionNumber}`;
             const description = b.lawId?.description || b.description || '';
             const tags = ACT_TAG_MAP[actCode] || [actCode];
-            return { _id: b._id, actCode, sectionNumber, sectionTitle, description, note: b.note || '', tags, verified: b.lawId?.isVerified || false };
+            const sectionId = b.lawId?._id || b.sectionId?._id || b.lawId || b.sectionId || '';
+            return { _id: b._id, sectionId, actCode, sectionNumber, sectionTitle, description, note: b.note || '', tags, verified: b.lawId?.isVerified || false };
           });
           setBookmarks(mapped);
         } else {

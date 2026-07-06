@@ -38,7 +38,10 @@ export default function SectionDetail() {
     api.get('/bookmarks')
       .then(res => {
         const bms = res.data?.data || [];
-        const found = bms.find(b => (b.sectionId?._id || b.sectionId) === id);
+        const found = bms.find(b => {
+          const bId = b.lawId?._id || b.sectionId?._id || b.lawId || b.sectionId;
+          return bId === id;
+        });
         setIsBookmarked(!!found);
       })
       .catch(() => {});
@@ -70,7 +73,7 @@ export default function SectionDetail() {
         await api.delete(`/bookmarks/${id}`);
         setIsBookmarked(false);
       } else {
-        await api.post('/bookmarks', { sectionId: id });
+        await api.post(`/bookmarks/${id}`);
         setIsBookmarked(true);
       }
     } catch {

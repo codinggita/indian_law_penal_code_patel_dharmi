@@ -145,7 +145,18 @@ export default function UserDashboard() {
       .catch(() => { });
 
     api.get('/bookmarks')
-      .then((res) => { if (res.data?.data) setBookmarks(res.data.data); })
+      .then((res) => {
+        if (res.data?.data) {
+          setBookmarks(res.data.data.map(b => ({
+            _id: b._id,
+            sectionId: b.lawId?._id || b.sectionId?._id || b.lawId || b.sectionId || '',
+            actCode: b.lawId?.actCode || b.actCode || '',
+            sectionNumber: b.lawId?.sectionNumber || b.sectionNumber || '',
+            sectionTitle: b.lawId?.sectionTitle || b.sectionTitle || `Section ${b.lawId?.sectionNumber || b.sectionNumber || ''}`,
+            note: b.note || ''
+          })));
+        }
+      })
       .catch(() => { });
 
     api.get('/notes')
@@ -205,6 +216,13 @@ export default function UserDashboard() {
       .finally(() => setNotes(prev => prev.filter(n => n._id !== noteId)));
   };
 
+  const handleDeleteBookmark = (sectionId, bookmarkId) => {
+    if (!sectionId) return;
+    api.delete(`/bookmarks/${sectionId}`)
+      .catch(() => { })
+      .finally(() => setBookmarks(prev => prev.filter(b => b._id !== bookmarkId)));
+  };
+
   const actDelays = ['delay-200', 'delay-250', 'delay-300', 'delay-350', 'delay-400', 'delay-450', 'delay-500', 'delay-600'];
 
   return (
@@ -258,11 +276,6 @@ export default function UserDashboard() {
               <p className="text-xs text-gray-500 dark:text-[#64748b]">
                 {new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
               </p>
-            </div>
-            {/* Dark mode permanent badge */}
-            <div className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white/5 border border-[#c9a84c]/20">
-              <span className="material-symbols-outlined text-[#c9a84c]" style={{ fontSize: '18px', fontVariationSettings: "'FILL' 1" }}>dark_mode</span>
-              <span className="text-xs font-semibold text-[#c9a84c] tracking-wide uppercase hidden md:block">Dark</span>
             </div>
           </div>
         </header>
@@ -464,7 +477,7 @@ export default function UserDashboard() {
                         <span className="text-sm font-semibold text-gray-900 dark:text-white">{b.sectionTitle}</span>
                       </div>
                       <button
-                        onClick={() => setBookmarks(prev => prev.filter(item => item._id !== b._id))}
+                        onClick={() => handleDeleteBookmark(b.sectionId, b._id)}
                         className="text-gray-400 dark:text-white/20 hover:text-red-500 dark:hover:text-red-400 opacity-0 group-hover:opacity-100 transition-opacity"
                       >
                         <span className="material-symbols-outlined text-[18px]">delete</span>
