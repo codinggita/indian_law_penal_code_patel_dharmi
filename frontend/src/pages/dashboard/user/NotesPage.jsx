@@ -80,7 +80,7 @@ const NoteCard = ({ note, isActive, onClick }) => {
       className={`w-full text-left p-4 rounded-xl border transition-all duration-200 group relative ${
         isActive
           ? 'bg-[#c9a84c]/10 border-[#c9a84c]/40 shadow-[0_0_20px_rgba(201,168,76,0.1)]'
-          : 'bg-[#111417]/60 border-white/5 hover:bg-[#1a1d20]/80 hover:border-white/10'
+          : 'bg-white/60 dark:bg-[#111417]/60 border-gray-200 dark:border-white/5 hover:bg-[#1a1d20]/10 dark:hover:bg-[#1a1d20]/80 hover:border-gray-300 dark:hover:border-white/10'
       }`}
     >
       {note.pinned && (
@@ -92,11 +92,11 @@ const NoteCard = ({ note, isActive, onClick }) => {
       <div className="flex items-start gap-2 mb-2 pr-4">
         <TagBadge tag={note.tag || 'General'} />
       </div>
-      <h3 className={`font-semibold text-sm leading-snug mb-1.5 ${isActive ? 'text-[#c9a84c]' : 'text-white'}`}>
+      <h3 className={`font-semibold text-sm leading-snug mb-1.5 ${isActive ? 'text-[#c9a84c]' : 'text-gray-900 dark:text-white'}`}>
         {note.title || note.sectionRef || 'Untitled Note'}
       </h3>
-      <p className="text-xs text-[#64748b] line-clamp-2 leading-relaxed">{preview}</p>
-      <p className="text-[10px] text-[#475569] mt-2">{formatDate(note.updatedAt || note.createdAt || new Date())}</p>
+      <p className="text-xs text-gray-500 dark:text-[#64748b] line-clamp-2 leading-relaxed">{preview}</p>
+      <p className="text-[10px] text-gray-400 dark:text-[#475569] mt-2">{formatDate(note.updatedAt || note.createdAt || new Date())}</p>
     </button>
   );
 };
@@ -271,7 +271,7 @@ export default function NotesPage() {
 
   /* ── Render ── */
   return (
-    <div className="min-h-[calc(100vh-4rem)] bg-[#0a0d0f] text-white flex flex-col">
+    <div className="min-h-[calc(100vh-4rem)] bg-transparent text-gray-900 dark:text-white flex flex-col">
 
       {/* Ambient background */}
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
@@ -280,7 +280,7 @@ export default function NotesPage() {
       </div>
 
       {/* ── Page Header ── */}
-      <div className="relative z-10 flex items-center justify-between px-6 lg:px-8 py-5 border-b border-white/[0.06]">
+      <div className="relative z-10 flex items-center justify-between px-6 lg:px-8 py-5 border-b border-gray-200 dark:border-white/[0.06]">
         <div className="flex items-center gap-3">
           <div className="w-9 h-9 rounded-xl bg-[#c9a84c]/10 border border-[#c9a84c]/20 flex items-center justify-center">
             <span className="material-symbols-outlined text-[#c9a84c] text-[18px]" style={{ fontVariationSettings: "'FILL' 1" }}>
@@ -288,8 +288,8 @@ export default function NotesPage() {
             </span>
           </div>
           <div>
-            <h1 className="text-lg font-semibold text-white tracking-tight">Legal Notes</h1>
-            <p className="text-xs text-[#475569]">{notes.length} notes · Personal legal annotations</p>
+            <h1 className="text-lg font-semibold text-gray-900 dark:text-white tracking-tight">Legal Notes</h1>
+            <p className="text-xs text-gray-500 dark:text-[#475569]">{notes.length} notes · Personal legal annotations</p>
           </div>
         </div>
         <button
@@ -305,21 +305,21 @@ export default function NotesPage() {
       <div className="relative z-10 flex flex-1 overflow-hidden h-[calc(100vh-10rem)]">
 
         {/* ── LEFT PANEL: Notes List ── */}
-        <div className="w-80 flex-shrink-0 border-r border-white/[0.06] flex flex-col bg-[#0d1014]/80 backdrop-blur-xl">
+        <div className="w-80 flex-shrink-0 border-r border-gray-200 dark:border-white/[0.06] flex flex-col bg-white/80 dark:bg-[#0d1014]/80 backdrop-blur-xl">
 
           {/* Search */}
-          <div className="p-3 border-b border-white/[0.06]">
-            <div className="flex items-center gap-2 bg-[#111417] border border-white/[0.08] rounded-xl px-3 py-2 focus-within:border-[#c9a84c]/40 transition-colors">
-              <span className="material-symbols-outlined text-[#475569] text-[16px]">search</span>
+          <div className="p-3 border-b border-gray-200 dark:border-white/[0.06]">
+            <div className="flex items-center gap-2 bg-gray-50 dark:bg-[#111417] border border-gray-200 dark:border-white/[0.08] rounded-xl px-3 py-2 focus-within:border-[#c9a84c]/40 transition-colors">
+              <span className="material-symbols-outlined text-gray-400 dark:text-[#475569] text-[16px]">search</span>
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search notes…"
-                className="bg-transparent outline-none border-none text-sm text-white placeholder-[#475569] w-full"
+                className="bg-transparent outline-none border-none text-sm text-gray-950 dark:text-white placeholder-gray-400 dark:placeholder-[#475569] w-full"
               />
               {searchQuery && (
-                <button onClick={() => setSearchQuery('')} className="text-[#475569] hover:text-white transition-colors">
+                <button onClick={() => setSearchQuery('')} className="text-gray-400 dark:text-[#475569] hover:text-gray-900 dark:hover:text-white transition-colors">
                   <span className="material-symbols-outlined text-[14px]">close</span>
                 </button>
               )}
@@ -331,15 +331,15 @@ export default function NotesPage() {
             {loading && (
               <div className="flex flex-col gap-2 mt-2">
                 {[1, 2, 3].map((i) => (
-                  <div key={i} className="h-24 rounded-xl bg-white/[0.03] animate-shimmer" />
+                  <div key={i} className="h-24 rounded-xl bg-gray-100/50 dark:bg-white/[0.03] animate-shimmer" />
                 ))}
               </div>
             )}
 
             {!loading && filteredNotes.length === 0 && (
               <div className="flex flex-col items-center justify-center py-16 text-center">
-                <span className="material-symbols-outlined text-[#2d3748] text-5xl mb-3">note_alt</span>
-                <p className="text-[#475569] text-sm">
+                <span className="material-symbols-outlined text-gray-400 dark:text-[#2d3748] text-5xl mb-3">note_alt</span>
+                <p className="text-gray-500 dark:text-[#475569] text-sm">
                   {searchQuery ? 'No notes match your search' : 'No notes yet'}
                 </p>
                 {!searchQuery && (
@@ -365,11 +365,11 @@ export default function NotesPage() {
         </div>
 
         {/* ── RIGHT PANEL: Note Editor ── */}
-        <div className="flex-1 flex flex-col overflow-hidden bg-[#0a0d0f]">
+        <div className="flex-1 flex flex-col overflow-hidden bg-white/40 dark:bg-[#0a0d0f]/40">
           {activeNote ? (
             <>
               {/* Editor Toolbar */}
-              <div className="flex items-center justify-between px-6 py-3 border-b border-white/[0.06] bg-[#0d1014]/50 backdrop-blur-sm">
+              <div className="flex items-center justify-between px-6 py-3 border-b border-gray-200 dark:border-white/[0.06] bg-white/50 dark:bg-[#0d1014]/50 backdrop-blur-sm">
                 <div className="flex items-center gap-3">
                   {/* Tag selector */}
                   <div className="flex items-center gap-1.5 flex-wrap">
@@ -393,7 +393,7 @@ export default function NotesPage() {
                 <div className="flex items-center gap-2">
                   {/* Save indicator */}
                   {saving ? (
-                    <span className="text-[11px] text-[#475569] flex items-center gap-1">
+                    <span className="text-[11px] text-gray-500 dark:text-[#475569] flex items-center gap-1">
                       <span className="material-symbols-outlined text-[14px] animate-spin">refresh</span>
                       Saving…
                     </span>
@@ -403,7 +403,7 @@ export default function NotesPage() {
                       Saved
                     </span>
                   ) : (
-                    <span className="text-[11px] text-[#334155]">
+                    <span className="text-[11px] text-gray-500 dark:text-[#334155]">
                       {formatDate(activeNote.updatedAt)}
                     </span>
                   )}
@@ -411,7 +411,7 @@ export default function NotesPage() {
                   {/* Pin button */}
                   <button
                     onClick={() => handleTogglePin(activeNote._id)}
-                    className={`w-8 h-8 flex items-center justify-center rounded-lg transition-all ${activeNote.pinned ? 'bg-[#c9a84c]/10 text-[#c9a84c]' : 'text-[#475569] hover:text-white hover:bg-white/5'}`}
+                    className={`w-8 h-8 flex items-center justify-center rounded-lg transition-all ${activeNote.pinned ? 'bg-[#c9a84c]/10 text-[#c9a84c]' : 'text-gray-400 dark:text-[#475569] hover:text-gray-900 dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5'}`}
                     title={activeNote.pinned ? 'Unpin' : 'Pin note'}
                   >
                     <span className="material-symbols-outlined text-[17px]" style={{ fontVariationSettings: activeNote.pinned ? "'FILL' 1" : "'FILL' 0" }}>
@@ -422,7 +422,7 @@ export default function NotesPage() {
                   {/* Delete button */}
                   <button
                     onClick={() => setDeleteConfirm(activeNote._id)}
-                    className="w-8 h-8 flex items-center justify-center rounded-lg text-[#475569] hover:text-[#ef4444] hover:bg-[#ef4444]/10 transition-all"
+                    className="w-8 h-8 flex items-center justify-center rounded-lg text-gray-400 dark:text-[#475569] hover:text-[#ef4444] hover:bg-[#ef4444]/10 transition-all"
                     title="Delete note"
                   >
                     <span className="material-symbols-outlined text-[17px]">delete</span>
@@ -438,7 +438,7 @@ export default function NotesPage() {
                   value={editorTitle}
                   onChange={handleTitleChange}
                   placeholder="Note title…"
-                  className="w-full bg-transparent text-2xl lg:text-3xl font-bold text-white placeholder-[#2d3748] outline-none border-none resize-none leading-tight"
+                  className="w-full bg-transparent text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white placeholder-gray-300 dark:placeholder-[#2d3748] outline-none border-none resize-none leading-tight"
                 />
 
                 {/* Section reference */}
@@ -449,12 +449,12 @@ export default function NotesPage() {
                     value={editorRef}
                     onChange={(e) => { setEditorRef(e.target.value); setIsEditing(true); triggerAutoSave(editorTitle, e.target.value, editorBody, editorTag); }}
                     placeholder="Section reference (e.g. IPC Section 302)…"
-                    className="bg-transparent text-sm text-[#c9a84c] placeholder-[#1e2933] outline-none border-none w-full font-medium"
+                    className="bg-transparent text-sm text-[#c9a84c] placeholder-amber-800/40 dark:placeholder-[#1e2933] outline-none border-none w-full font-medium"
                   />
                 </div>
 
                 {/* Divider */}
-                <div className="border-t border-white/[0.06]" />
+                <div className="border-t border-gray-200 dark:border-white/[0.06]" />
 
                 {/* Body / Main text area */}
                 <textarea
@@ -462,14 +462,14 @@ export default function NotesPage() {
                   value={editorBody}
                   onChange={handleBodyChange}
                   placeholder={`Start writing your legal annotation…\n\nTip: Use numbered lists, checkboxes (☑), and section citations for quick reference.`}
-                  className="w-full min-h-[420px] bg-transparent text-[15px] text-[#cbd5e1] placeholder-[#1e293b] outline-none border-none resize-none leading-relaxed font-mono"
+                  className="w-full min-h-[420px] bg-transparent text-[15px] text-gray-800 dark:text-[#cbd5e1] placeholder-gray-400 dark:placeholder-[#1e293b] outline-none border-none resize-none leading-relaxed font-mono"
                   spellCheck={false}
                 />
               </div>
 
               {/* Word count footer */}
-              <div className="px-6 lg:px-10 py-3 border-t border-white/[0.04] flex items-center justify-between">
-                <span className="text-[11px] text-[#334155]">
+              <div className="px-6 lg:px-10 py-3 border-t border-gray-200 dark:border-white/[0.04] flex items-center justify-between">
+                <span className="text-[11px] text-gray-500 dark:text-[#334155]">
                   {editorBody.split(/\s+/).filter(Boolean).length} words · {editorBody.length} chars
                 </span>
                 <div className="flex items-center gap-1">
@@ -485,8 +485,8 @@ export default function NotesPage() {
                   edit_note
                 </span>
               </div>
-              <h2 className="text-2xl font-semibold text-white mb-2">Your Legal Notepad</h2>
-              <p className="text-[#475569] text-sm max-w-xs leading-relaxed mb-6">
+              <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-2">Your Legal Notepad</h2>
+              <p className="text-gray-500 dark:text-[#475569] text-sm max-w-xs leading-relaxed mb-6">
                 Select a note from the left panel to start editing, or create a new one.
               </p>
               <button
@@ -507,16 +507,16 @@ export default function NotesPage() {
           className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-fade-in"
           onClick={(e) => { if (e.target === e.currentTarget) setShowNewNoteModal(false); }}
         >
-          <div className="w-full max-w-lg bg-[#0f1317] border border-white/[0.08] rounded-2xl shadow-2xl animate-scale-in overflow-hidden">
+          <div className="w-full max-w-lg bg-white dark:bg-[#0f1317] border border-gray-200 dark:border-white/[0.08] rounded-2xl shadow-2xl animate-scale-in overflow-hidden">
             {/* Modal header */}
-            <div className="flex items-center justify-between px-6 py-4 border-b border-white/[0.06]">
+            <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200 dark:border-white/[0.06]">
               <div className="flex items-center gap-2">
                 <span className="material-symbols-outlined text-[#c9a84c] text-[20px]">note_add</span>
-                <h2 className="font-semibold text-white text-base">New Legal Note</h2>
+                <h2 className="font-semibold text-gray-900 dark:text-white text-base">New Legal Note</h2>
               </div>
               <button
                 onClick={() => setShowNewNoteModal(false)}
-                className="text-[#475569] hover:text-white transition-colors"
+                className="text-gray-400 dark:text-[#475569] hover:text-gray-900 dark:hover:text-white transition-colors"
               >
                 <span className="material-symbols-outlined text-[20px]">close</span>
               </button>
@@ -526,32 +526,32 @@ export default function NotesPage() {
             <div className="px-6 py-5 space-y-4">
               {/* Title */}
               <div>
-                <label className="text-xs text-[#64748b] font-medium uppercase tracking-wider mb-1 block">Title</label>
+                <label className="text-xs text-gray-500 dark:text-[#64748b] font-medium uppercase tracking-wider mb-1 block">Title</label>
                 <input
                   autoFocus
                   type="text"
                   value={newTitle}
                   onChange={(e) => setNewTitle(e.target.value)}
                   placeholder="e.g. IPC § 302 — Murder Analysis"
-                  className="w-full bg-[#111417] border border-white/[0.08] focus:border-[#c9a84c]/50 rounded-xl px-4 py-2.5 text-white text-sm placeholder-[#334155] outline-none transition-colors"
+                  className="w-full bg-gray-50 dark:bg-[#111417] border border-gray-200 dark:border-white/[0.08] focus:border-[#c9a84c]/50 rounded-xl px-4 py-2.5 text-gray-900 dark:text-white text-sm placeholder-gray-400 dark:placeholder-[#334155] outline-none transition-colors"
                 />
               </div>
 
               {/* Section ref */}
               <div>
-                <label className="text-xs text-[#64748b] font-medium uppercase tracking-wider mb-1 block">Section Reference</label>
+                <label className="text-xs text-gray-500 dark:text-[#64748b] font-medium uppercase tracking-wider mb-1 block">Section Reference</label>
                 <input
                   type="text"
                   value={newRef}
                   onChange={(e) => setNewRef(e.target.value)}
                   placeholder="e.g. IPC Section 302"
-                  className="w-full bg-[#111417] border border-white/[0.08] focus:border-[#c9a84c]/50 rounded-xl px-4 py-2.5 text-white text-sm placeholder-[#334155] outline-none transition-colors"
+                  className="w-full bg-gray-50 dark:bg-[#111417] border border-gray-200 dark:border-white/[0.08] focus:border-[#c9a84c]/50 rounded-xl px-4 py-2.5 text-gray-900 dark:text-white text-sm placeholder-gray-400 dark:placeholder-[#334155] outline-none transition-colors"
                 />
               </div>
 
               {/* Tag */}
               <div>
-                <label className="text-xs text-[#64748b] font-medium uppercase tracking-wider mb-2 block">Tag</label>
+                <label className="text-xs text-gray-500 dark:text-[#64748b] font-medium uppercase tracking-wider mb-2 block">Tag</label>
                 <div className="flex flex-wrap gap-2">
                   {TAG_OPTIONS.map((t) => (
                     <button
@@ -572,22 +572,22 @@ export default function NotesPage() {
 
               {/* Body */}
               <div>
-                <label className="text-xs text-[#64748b] font-medium uppercase tracking-wider mb-1 block">Note Content</label>
+                <label className="text-xs text-gray-500 dark:text-[#64748b] font-medium uppercase tracking-wider mb-1 block">Note Content</label>
                 <textarea
                   value={newBody}
                   onChange={(e) => setNewBody(e.target.value)}
                   placeholder="Write your legal annotations, case notes, or research here…"
                   rows={6}
-                  className="w-full bg-[#111417] border border-white/[0.08] focus:border-[#c9a84c]/50 rounded-xl px-4 py-3 text-white text-sm placeholder-[#334155] outline-none transition-colors resize-none font-mono leading-relaxed"
+                  className="w-full bg-gray-50 dark:bg-[#111417] border border-gray-200 dark:border-white/[0.08] focus:border-[#c9a84c]/50 rounded-xl px-4 py-3 text-gray-900 dark:text-white text-sm placeholder-gray-400 dark:placeholder-[#334155] outline-none transition-colors resize-none font-mono leading-relaxed"
                 />
               </div>
             </div>
 
             {/* Modal footer */}
-            <div className="flex items-center justify-end gap-3 px-6 py-4 border-t border-white/[0.06]">
+            <div className="flex items-center justify-end gap-3 px-6 py-4 border-t border-gray-200 dark:border-white/[0.06]">
               <button
                 onClick={() => setShowNewNoteModal(false)}
-                className="px-4 py-2 text-sm text-[#64748b] hover:text-white transition-colors rounded-xl hover:bg-white/5"
+                className="px-4 py-2 text-sm text-gray-400 dark:text-[#64748b] hover:text-gray-900 dark:hover:text-white transition-colors rounded-xl hover:bg-black/5 dark:hover:bg-white/5"
               >
                 Cancel
               </button>
@@ -610,20 +610,20 @@ export default function NotesPage() {
           className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-fade-in"
           onClick={(e) => { if (e.target === e.currentTarget) setDeleteConfirm(null); }}
         >
-          <div className="w-full max-w-sm bg-[#0f1317] border border-[#ef4444]/20 rounded-2xl shadow-2xl animate-scale-in p-6">
+          <div className="w-full max-w-sm bg-white dark:bg-[#0f1317] border border-gray-200 dark:border-[#ef4444]/20 rounded-2xl shadow-2xl animate-scale-in p-6">
             <div className="flex items-center gap-3 mb-4">
               <div className="w-10 h-10 rounded-full bg-[#ef4444]/10 flex items-center justify-center flex-shrink-0">
                 <span className="material-symbols-outlined text-[#ef4444] text-[20px]">warning</span>
               </div>
               <div>
-                <h3 className="font-semibold text-white text-base">Delete Note?</h3>
-                <p className="text-xs text-[#64748b] mt-0.5">This action cannot be undone.</p>
+                <h3 className="font-semibold text-gray-900 dark:text-white text-base">Delete Note?</h3>
+                <p className="text-xs text-gray-500 dark:text-[#64748b] mt-0.5">This action cannot be undone.</p>
               </div>
             </div>
             <div className="flex gap-3 justify-end">
               <button
                 onClick={() => setDeleteConfirm(null)}
-                className="px-4 py-2 text-sm text-[#64748b] hover:text-white transition-colors rounded-xl hover:bg-white/5"
+                className="px-4 py-2 text-sm text-gray-400 dark:text-[#64748b] hover:text-gray-900 dark:hover:text-white transition-colors rounded-xl hover:bg-black/5 dark:hover:bg-white/5"
               >
                 Cancel
               </button>
