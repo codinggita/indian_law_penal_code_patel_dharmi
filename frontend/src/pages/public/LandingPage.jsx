@@ -440,15 +440,14 @@ const LandingPage = () => {
               <br />
               with{' '}
               <span
-                className="relative inline-block"
+                className="relative inline-block px-1"
                 style={{
-                  background: dark
+                  backgroundImage: dark
                     ? 'linear-gradient(135deg, #c9a84c, #f0d074, #e6c364)'
                     : 'linear-gradient(135deg, #a37f22, #d5ae3c, #c9a84c)',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
                   backgroundClip: 'text',
-                  color: 'transparent',
                 }}
               >
                 Precision
@@ -604,76 +603,79 @@ const LandingPage = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-12 gap-5">
-            {FEATURES.map((feat, idx) => (
-              <div
-                key={idx}
-                className={`md:col-span-${feat.span} relative bg-white/70 dark:bg-[#141118]/70 backdrop-blur-md rounded-2xl p-7 border border-[#e5e7eb]/60 dark:border-white/5 flex flex-col justify-between overflow-hidden group card-hover shadow-sm hover:shadow-xl transition-all duration-500 ${
-                  featVisible ? 'reveal-up' : 'opacity-0'
-                }`}
-                style={{
-                  animationDelay: featVisible ? `${idx * 0.1}s` : '0s',
-                  minHeight: feat.span === 8 ? '340px' : '280px',
-                }}
-              >
-                {/* Accent bar */}
+            {FEATURES.map((feat, idx) => {
+              const spanClass = feat.span === 8 ? 'md:col-span-8' : 'md:col-span-4';
+              return (
                 <div
-                  className="absolute top-0 left-0 right-0 h-[2px] rounded-t-2xl transition-all duration-300 group-hover:h-[3px]"
-                  style={{
-                    background: feat.accent === 'gold'
-                      ? 'linear-gradient(90deg, #c9a84c, #f0d074, #c9a84c)'
-                      : 'linear-gradient(90deg, #7c4dff, #a78bfa, #7c4dff)',
-                  }}
-                />
-
-                {/* Hover glow */}
-                <div
-                  className="absolute top-0 right-0 w-48 h-48 rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none -mr-12 -mt-12"
-                  style={{
-                    background: feat.accent === 'gold'
-                      ? 'radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%)'
-                      : 'radial-gradient(circle, rgba(124,77,255,0.08) 0%, transparent 70%)',
-                  }}
-                />
-
-                <div>
-                  <div
-                    className="w-12 h-12 rounded-xl flex items-center justify-center mb-5 border border-[#e5e7eb]/50 dark:border-white/5 group-hover:scale-110 transition-transform duration-300"
-                    style={{
-                      background: dark ? 'rgba(255,255,255,0.03)' : 'rgba(249,250,251,0.8)',
-                    }}
-                  >
-                    <span
-                      className={`material-symbols-outlined ${
-                        feat.accent === 'gold' ? 'text-[#c9a84c]' : 'text-[#7c4dff]'
-                      } group-hover:rotate-6 transition-transform duration-300`}
-                      style={{ fontSize: '22px', fontVariationSettings: "'FILL' 1" }}
-                    >
-                      {feat.icon}
-                    </span>
-                  </div>
-                  <h3 className="text-xl font-bold text-[#111827] dark:text-white mb-2.5 tracking-tight group-hover:text-[#c9a84c] dark:group-hover:text-[#e6c364] transition-colors duration-300">
-                    {feat.title}
-                  </h3>
-                  <p className="text-sm text-[#6b7280] dark:text-[#9ca3af] leading-relaxed font-normal">
-                    {feat.desc}
-                  </p>
-                </div>
-
-                <a
-                  href="#"
-                  className={`mt-5 inline-flex items-center gap-1.5 text-sm font-bold hover:underline underline-offset-4 transition-colors ${
-                    feat.accent === 'gold'
-                      ? 'text-[#c9a84c] dark:text-[#e6c364]'
-                      : 'text-[#7c4dff] dark:text-[#a78bfa]'
+                  key={idx}
+                  className={`${spanClass} relative bg-white/70 dark:bg-[#141118]/70 backdrop-blur-md rounded-2xl p-7 border border-[#e5e7eb]/60 dark:border-white/5 flex flex-col justify-between overflow-hidden group card-hover shadow-sm hover:shadow-xl transition-all duration-500 ${
+                    featVisible ? 'reveal-up' : 'opacity-0'
                   }`}
+                  style={{
+                    animationDelay: featVisible ? `${idx * 0.1}s` : '0s',
+                    minHeight: feat.span === 8 ? '340px' : '280px',
+                  }}
                 >
-                  Learn More
-                  <span className="material-symbols-outlined group-hover:translate-x-1.5 transition-transform duration-300" style={{ fontSize: '16px' }}>
-                    arrow_forward
-                  </span>
-                </a>
-              </div>
-            ))}
+                  {/* Accent bar */}
+                  <div
+                    className="absolute top-0 left-0 right-0 h-[2px] rounded-t-2xl transition-all duration-300 group-hover:h-[3px]"
+                    style={{
+                      background: feat.accent === 'gold'
+                        ? 'linear-gradient(90deg, #c9a84c, #f0d074, #c9a84c)'
+                        : 'linear-gradient(90deg, #7c4dff, #a78bfa, #7c4dff)',
+                    }}
+                  />
+
+                  {/* Hover glow */}
+                  <div
+                    className="absolute top-0 right-0 w-48 h-48 rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none -mr-12 -mt-12"
+                    style={{
+                      background: feat.accent === 'gold'
+                        ? 'radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%)'
+                        : 'radial-gradient(circle, rgba(124,77,255,0.08) 0%, transparent 70%)',
+                    }}
+                  />
+
+                  <div>
+                    <div
+                      className="w-12 h-12 rounded-xl flex items-center justify-center mb-5 border border-[#e5e7eb]/50 dark:border-white/5 group-hover:scale-110 transition-transform duration-300"
+                      style={{
+                        background: dark ? 'rgba(255,255,255,0.03)' : 'rgba(249,250,251,0.8)',
+                      }}
+                    >
+                      <span
+                        className={`material-symbols-outlined ${
+                          feat.accent === 'gold' ? 'text-[#c9a84c]' : 'text-[#7c4dff]'
+                        } group-hover:rotate-6 transition-transform duration-300`}
+                        style={{ fontSize: '22px', fontVariationSettings: "'FILL' 1" }}
+                      >
+                        {feat.icon}
+                      </span>
+                    </div>
+                    <h3 className="text-xl font-bold text-[#111827] dark:text-white mb-2.5 tracking-tight group-hover:text-[#c9a84c] dark:group-hover:text-[#e6c364] transition-colors duration-300">
+                      {feat.title}
+                    </h3>
+                    <p className="text-sm text-[#6b7280] dark:text-[#9ca3af] leading-relaxed font-normal">
+                      {feat.desc}
+                    </p>
+                  </div>
+
+                  <a
+                    href="#"
+                    className={`mt-5 inline-flex items-center gap-1.5 text-sm font-bold hover:underline underline-offset-4 transition-colors ${
+                      feat.accent === 'gold'
+                        ? 'text-[#c9a84c] dark:text-[#e6c364]'
+                        : 'text-[#7c4dff] dark:text-[#a78bfa]'
+                    }`}
+                  >
+                    Learn More
+                    <span className="material-symbols-outlined group-hover:translate-x-1.5 transition-transform duration-300" style={{ fontSize: '16px' }}>
+                      arrow_forward
+                    </span>
+                  </a>
+                </div>
+              );
+            })}
           </div>
         </section>
 
